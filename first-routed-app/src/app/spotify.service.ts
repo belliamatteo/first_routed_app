@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-
+import { AlbumComponent } from './album/album.component';
+import { ArtistComponent } from './artist/artist.component';
 
 //Dichiaro che il servizio è iniettabile agli altri componenti a partire dal componente root
 @Injectable({
@@ -14,23 +15,21 @@ export class SpotifyService {
 
   searchTrack(query: string) {
     const url = `https://api.spotify.com/v1/search?q=${query}&type=track`;
-    const headers = new HttpHeaders({
-      Authorization:
-        'Bearer BQCVcy7wm28tyMC74FfhcRPtRpNjZfnIk0eFb3lQRPwXwlBBey4FBAcHq6OXy3kSTXOa3zf_xafgFxKIZtB7irOdv0hxFNP8nyqt7stkkGBZoLooK1nwMBUxeL0gyAqMl2s46CM9bkPWpZM'
-    });
-
+    const headers = new HttpHeaders({Authorization: environment.oauthToken});
     let obsTracks = this.http.get(url, { headers });
     return obsTracks;
-    //Ritorno un observable ai componenti che richiedono il servizio
   }
 
   getTrack(id: string) {
     const url = `https://api.spotify.com/v1/tracks/${id}`;
-    const headers = new HttpHeaders({
-      Authorization: environment.oauthToken
-    });
+    const headers = new HttpHeaders({Authorization: environment.oauthToken});
     return this.http.get(url, { headers });
   }
 
+  getArtist(id: string) {
+    const url = `https://api.spotify.com/v1/artists/${id}`;
+    const headers = new HttpHeaders({Authorization: environment.artistid});
+    return this.http.get(url, { headers });
+  }
 
 }
