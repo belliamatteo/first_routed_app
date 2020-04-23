@@ -1,8 +1,14 @@
 <div *ngIf="album">
-    <h1>{{ album.name }}</h1>
-    <p>
-        <img src="{{ album.images[1].url }}">
+	<h1>{{ album.name }}</h1>
+	<p>
+		<img src="{{ album.images[1].url }}">
     </p>
+		<p>
+			Tipo: {{ album.type }}
+		</p><br>
+		<p>
+			ID: {{ album.id }}
+		</p><br>
 
-    <p><a href (click)="back()">Back</a></p>
+		<p><a href (click)="back()">Back</a></p>
 </div>
